@@ -1108,6 +1108,7 @@ function linkProjects_mame_mess(_target, _subtarget)
 		"dms",
 		"dragon",
 		"drc",
+		"dterhune",
 		"dulmont",
 		"eaca",
 		"einis",
@@ -2083,6 +2084,11 @@ files {
 createMESSProjects(_target, _subtarget, "drc")
 files {
 	MAME_DIR .. "src/mame/drivers/zrt80.cpp",
+}
+
+createMESSProjects(_target, _subtarget, "dterhune")
+files {
+	MAME_DIR .. "src/mame/drivers/dt65pc.cpp",
 }
 
 createMESSProjects(_target, _subtarget, "dulmont")

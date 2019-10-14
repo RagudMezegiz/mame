@@ -209,6 +209,7 @@ dpb7000.cpp
 dps1.cpp
 dragon.cpp
 dsb46.cpp
+dt65pc.cpp
 dual68.cpp
 duet16.cpp
 dvk_kcgd.cpp

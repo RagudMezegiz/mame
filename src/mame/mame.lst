@@ -12002,6 +12002,9 @@ drw80pkr                        // (c) 1982 IGT
 @source:dsb46.cpp
 dsb46                           //
 
+@source:dt65pc.cpp
+dt65pc                          // (c) 2019 David Terhune
+
 @source:dual68.cpp
 dual68                          //
 
