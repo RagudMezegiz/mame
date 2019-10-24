@@ -9,6 +9,9 @@
 	actually be constructed for real.
 
 	Main CPU: 65C816
+	Video Controller: Yamaha v9938
+
+	Math ROMs by Garth Wilson
 
 ****************************************************************************/
 
@@ -53,19 +56,26 @@ void dt65pc_state::dt65pc(machine_config& config)
 
 void dt65pc_state::dt65pc_mem(address_map& map)
 {
-	map(0x0000, 0xcfff).ram();    // low RAM
+	map(0x0000, 0xcfff).ram();       // low RAM
 	map(0xd000, 0xd003).rw(m_video, FUNC(v9938_device::read), FUNC(v9938_device::write));
-	map(0xd004, 0xdfff).noprw();  // future IO space
-	map(0xe000, 0xffff).rom();    // kernel ROM
-	map(0x10000, 0xffffff).ram(); // high RAM
+	map(0xd004, 0xd7ff).noprw();     // future IO space
+	map(0xd800, 0xdfff).rom();       // font ROM
+	map(0xe000, 0xffff).rom();       // kernel ROM
+	map(0x10000, 0xdfffff).ram();    // high RAM
+	map(0xe00000, 0xeffff3).rom();   // math ROM0
+	map(0xeffff4, 0xefffff).noprw(); // empty bits
+	map(0xf00000, 0xffffff).rom();   // math ROM1
 }
 
 static INPUT_PORTS_START( dt65pc )
 INPUT_PORTS_END
 
 ROM_START( dt65pc )
-	ROM_REGION( 0x2000, "maincpu", 0 )
+	ROM_REGION( 0x1000000, "maincpu", 0 )
+	ROM_LOAD("font.pf", 0xd800, 0x800, CRC(7808f35f) SHA1(e3d60ae6391bc02cf8f0a6de51d7650766df3171))
 	//ROM_LOAD( "dt65pc.rom", 0xe0000, 0x2000, 0 ) // Add CRC and SHA1 with final kernel
+	ROM_LOAD("math0.rom", 0xe00000, 0xffff4, CRC(e5fa9130) SHA1(d7c23d6b61841bab83dd7acb743281f55002e3a8))
+	ROM_LOAD("math1.rom", 0xf00000, 0x100000, CRC(4ae9c612) SHA1(874fc420d56f03f999ea7908e21b15de3fc520e6))
 ROM_END
 
 //    YEAR,   NAME, PARENT, COMPAT, MACHINE,  INPUT,        CLASS,       INIT,    COMPANY, FULLNAME, FLAGS
